@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Audio samples</title>
+        <link rel="stylesheet" href="../../styles.css">
+    </head>
+    <body>
+        <h1>Testing the speaker encoder with different references</h1>
+        <a href='../../index.html'>Back to home</a>
+        <p>
+            To better understand what the speaker encoder does we tried conditioning the TTS model using different types of reference audio.
+            We use pre-trained modules from <a href="https://github.com/CorentinJ/Real-Time-Voice-Cloning">here</a>.
+        </p>
+        <p>
+            It should be clear just by listening to the following the samples that the alignment fails easily, inserting a long pause in the middle
+            of the output. This might be amplified by the fact that we condition the model most often on short audio references.
+        </p>
+        <hr></hr>
+        <div>
+            <h2>Nonverbal content</h2>
+            <div>
+                Here we try different, nonverbal audio content. All references are 30 seconds long. For every experiment we condition the TTS model on
+                the phrase <span style='font-style: italic;'>"this is a test sentence"</span>.
+            </div>
+            <br><br>
+            <table>
+                <thead>
+                    <th scope="col">Description</th>
+                    <th scope="col">Reference</th>
+                    <th scope="col">Output</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Brownian noise (amplitude=0.4)</td>
+                        <td>
+                            <audio controls=""><source src="audio/in/brownian.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/brownian.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>400Hz pure tone (amplitude=0.4)</td>
+                        <td>
+                            <audio controls=""><source src="audio/in/400hz.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/400hz.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>120Hz pure tone (amplitude=0.4)</td>
+                        <td>
+                            <audio controls=""><source src="audio/in/120hz.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/120hz.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mixed 120Hz/400Hz pure tone</td>
+                        <td>
+                            <audio controls=""><source src="audio/in/hz_split.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/hz_split.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>A Symphony</td>
+                        <td>
+                            <audio controls=""><source src="audio/in/mozart.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/mozart.wav"></audio>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <p>
+                A pure tone is enough to generate speech. As expected, a higher pitch results in a
+                female sounding voice (avg. female 165Hz-255Hz, avg. male 85-180Hz). Interestingly, the lower
+                frequency pure tone results in a deep female voice rather than a male voice.
+            </p>
+        </div>
+        <hr></hr>
+        <div>
+            <h2>Testing the same verbal reference</h2>
+            <div>
+                Here we try conditioning the model on different elements of the same segment
+                of speech, spoken by a US male. Again we condition the TTS model on
+                the phrase <span style='font-style: italic;'>"this is a test sentence"</span>.
+            </div>
+            <br><br>
+            <table>
+                <thead>
+                    <th scope="col">Description</th>
+                    <th scope="col">Reference</th>
+                    <th scope="col">Output</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Original audio</td>
+                        <td>
+                            <audio controls=""><source src="audio/in/us_male.mp3"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/us_male.wav"></audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>The original audio in reverse</td>
+                        <td>
+                            <audio controls=""><source src="audio/in/us_male_reverse.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/us_male_reverse.wav"></audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Just the pitch contour (extracted using PRAAT)</td>
+                        <td>
+                            <audio controls=""><source src="audio/in/us_male_contour.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/us_male_contour.wav"></audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2x tempo (pitch kept fixed)</td>
+                        <td>
+                            <audio controls=""><source src="audio/in/us_male_2xtempo.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/us_male_2xtempo.wav"></audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>The original audio overlayed with a female voice</td>
+                        <td>
+                            <audio controls=""><source src="audio/in/mixed_voices.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/mixed_voices.wav"></audio>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <p>
+                Interestingly, there doesn't seem to be a huge effect on output prosody by reversing the audio.
+                This is especially noticeable by the pronunciation of "test sentence". The encoder uses a single-directional RNN
+                to encode the reference. Perhaps the pitch/emphasis information encoded in the embedding is invariant to directionality
+                or that information is better captured by the underlying TTS model.
+            </p>
+        </div>
+        <hr></hr>
+        <div>
+            <h2>Testing duration and a different language</h2>
+            <div>
+                Here we condition the encoder on the same speaker using a varying amount of speech. We would
+                assume that the encoder gives a better estimation using a larger speech segment to generate the embedding.
+                We also perform the same experiment using a different language from the one used to train the model (Icelandic).
+            </div>
+            <br><br>
+
+            <table>
+                <thead>
+                    <th scope="col">English reference sample</th>
+                    <th scope="col">Icelandic reference sample</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <audio controls=""><source src="audio/in/me_en_5sec.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/in/me_ice_5sec.wav"></audio>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br><br>
+
+            <table>
+                <thead>
+                    <th scope="col">Duration of reference</th>
+                    <th scope="col">English reference</th>
+                    <th scope="col">Icelandic reference</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5 seconds</td>
+                        <td>
+                            <audio controls=""><source src="audio/out/me_en_5sec.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/me_ice_5sec.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>10 seconds</td>
+                        <td>
+                            <audio controls=""><source src="audio/out/me_en_10sec.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/me_ice_10sec.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>30 seconds</td>
+                        <td>
+                            <audio controls=""><source src="audio/out/me_en_30sec.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/me_ice_30sec.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>60 seconds</td>
+                        <td>
+                            <audio controls=""><source src="audio/out/me_en_60sec.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/out/me_ice_60sec.wav"></audio>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <br>
+            <p>
+                Interestingly, there doesn't seem to be a huge effect on output prosody by reversing the audio.
+                This is especially noticeable by the pronunciation of "test sentence". The encoder uses a single-directional RNN
+                to encode the reference. Perhaps the pitch/emphasis information encoded in the embedding is invariant to directionality
+                or that information is better captured by the underlying TTS model.
+            </p>
+        </div>
+    </body>
+</html>
