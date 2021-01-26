@@ -7,4 +7,4 @@ It's simple to add a new page.
 2. Then link to that page on the main `index.html` to make it visible on the index.
 3. Put all audio to be included under the `audio` directory in your new page directory.
 4. To include it on the page use the following HTML `<audio controls=""><source src="audio/path_to_your_file.wav"></audio>`
-5. Commit and push the code. Your new page should now be visible at [this domain](https://atlisig.github.io/cloning_samples/).
+5. Commit and push the code. Your new page should now be visible at [this domain](https://atlisig.github.io/cloning_samples/index.html).
