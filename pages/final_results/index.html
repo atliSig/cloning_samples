@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Audio samples</title>
+        <link rel="stylesheet" href="../../styles.css">
+    </head>
+    <body>
+        <h1>Audio samples for the paper <i>Fast and Controllable Novel Speaker Generation</i></h1>
+        <a href='../../index.html'>Back to home</a>
+        <div>
+            <h2>The 247 speakers</h2>
+            <p>
+                The underlying FastSpeech model is conditioned on speaker labels and learns to model 247 different speakers.
+                Here we compare ground truth audio and synthesized audio for a selection of the speakers in the corpus.
+            </p>
+            <table>
+                <thead>
+                    <th scope="col">Speaker</th>
+                    <th scope="col">Ground truth</th>
+                    <th scope="col">Synthesized</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#232</td>
+                        <td>
+                            <audio controls=""><source src="audio/1_synth/232.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/1_gt/232.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#239</td>
+                        <td>
+                            <audio controls=""><source src="audio/1_synth/239.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/1_gt/239.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#241</td>
+                        <td>
+                            <audio controls=""><source src="audio/1_synth/241.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/1_gt/241.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#243</td>
+                        <td>
+                            <audio controls=""><source src="audio/1_synth/243.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/1_gt/243.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#244</td>
+                        <td>
+                            <audio controls=""><source src="audio/1_synth/244.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/1_gt/244.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#246</td>
+                        <td>
+                            <audio controls=""><source src="audio/1_synth/246.wav"></audio>
+                        </td>
+                        <td>
+                            <audio controls=""><source src="audio/1_gt/246.wav"></audio>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <h2>Randomly sampling speakers</h2>
+            <p>
+                We can randomly sample from the latent space over speakers to create new voices. In the following examples we have sampled N new speakers
+                from the unit hyper spheres around known speakers. We do this to efficiently control pitch and perceived gender.
+            </p>
+            <table>
+                <thead>
+                    <th scope="col">Closest</th>
+                    <th scope="col">Synthesized</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#4214</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/4214.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#5514</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/5514.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#1553</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/1553.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#6531</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/6531.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#5561</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/5561.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#3374</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/3374.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#1034</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/1034.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#6529</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/6529.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#2436</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/2436.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#3486</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/3486.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#2159</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/2159.wav"></audio>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#4397</td>
+                        <td>
+                            <audio controls=""><source src="audio/2_pitch_scale/4397.wav"></audio>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
